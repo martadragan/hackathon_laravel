@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('jukebox/edit', 'JukeboxController@edit');
+Route::post('jukebox/edit', 'JukeboxController@edit');
