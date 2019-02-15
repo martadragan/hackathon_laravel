@@ -11,6 +11,7 @@ class JukeboxController extends Controller
 
     public function edit(Request $request)
     {
+        // dd($request->all());
         if ($request->has('id')){
             $query = "
                 SELECT *
@@ -68,6 +69,7 @@ class JukeboxController extends Controller
                     $request->input('id')
                 ]);
             } else {
+                // dd('here');
                 $query = 
                    "INSERT
                     INTO `jukebox`
@@ -88,7 +90,7 @@ class JukeboxController extends Controller
            
             Session::flash('success_message', 'Song was successfully saved.');
 
-            return redirect('jukebox/edit?id='.$song->id);
+            return redirect('jukebox/edit');
         } 
         $edit_form = view('jukebox/edit', [
             'song' => $song

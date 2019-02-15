@@ -20,56 +20,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Jukebox</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Admin</title>
 </head>
 <body>
     
-<form action="" method="post">
+<div class="jumbotron">
+    <form action="" method="post">
+    
+    <?= csrf_field() ?>
+    
+    <div class="form-group">
+    <label for="">Title:</label> <br>
+    <input type="text" name="title" value="<?= htmlspecialchars(old('title', $song->title)) ?>">
+    </div>
+    
+    
+    <div class="form-group">
+    <label for="">Code of the video:</label> <br>
+    <input type="text" name="code" value="<?= htmlspecialchars(old('code', $song->code)) ?>">
+    </div>
+    
+    <div class="form-group">
+    <label for="">Author:</label> <br>
+    <input type="text" name="author" value="<?= htmlspecialchars(old('author', $song->author)) ?>">
+    </div>
+    
+    <div class="form-group">
+    <label for="">URL:</label> <br>
+    <input type="text" name="url" value="<?= htmlspecialchars(old('url', $song->url)) ?>">
+    </div>
+    
+    <div class="form-group">
+    <label for="">Description:</label> <br>
+    <textarea name="description" id="" cols="30" rows="10"><?= htmlspecialchars(old('description', $song->description)) ?></textarea>
+    </div>
+    
+    <div class="form-group">
+    <input type="submit" value="SUBMIT" class="btn btn-success">
+    <br>
+    <br>
+    <button type="submit" class="btn btn-primary"><a href="/jukebox">GO BACK</a>
+    </button>
+    </div>
+    </form>
+    
+    <form action="/jukebox/delete" method="post">
+    <?= csrf_field() ?>
+    
+    <div class="delete-flex">
+        <div class="form-group">
+        <p>Delete by ID</p>
+        <label for="">ID</label> <br>
+        <input type="text" name="id" value="<?= htmlspecialchars(old('id', $song->id)) ?>">
+        </div>    
+        <div>
+        <input type="submit" value="Delete" class="btn btn-danger">
+        </div>
+        </div>
 
-<?= csrf_field() ?>
+    </form>
+</div>    
+<style>
+.jumbotron{
+    display: flex;
+    justify-content: space-around;
+}
+a {
+    color:white;
+    text-decoration: none;
+}
 
-<div>
-<label for="">Title:</label>
-<input type="text" name="title" value="<?= htmlspecialchars(old('title', $song->title)) ?>">
-</div>
 
 
-<div>
-<label for="">Code of the video:</label>
-<input type="text" name="code" value="<?= htmlspecialchars(old('code', $song->code)) ?>">
-</div>
 
-<div>
-<label for="">Author:</label>
-<input type="text" name="author" value="<?= htmlspecialchars(old('author', $song->author)) ?>">
-</div>
-
-<div>
-<label for="">URL:</label>
-<input type="text" name="url" value="<?= htmlspecialchars(old('url', $song->url)) ?>">
-</div>
-
-<div>
-<label for="">Description:</label>
-<textarea name="description" id="" cols="30" rows="10"><?= htmlspecialchars(old('description', $song->description)) ?></textarea>
-</div>
-
-<div>
-<input type="submit" value="SUBMIT">
-</div>
-</form>
-
-<form action="/jukebox/delete" method="post">
-<?= csrf_field() ?>
-
-<p>Delete by ID</p>
-<div>
-<label for="">ID</label>
-<input type="text" name="id" value="<?= htmlspecialchars(old('id', $song->id)) ?>">
-<input type="submit" value="Delete">
-</div>
-
-</form>
+</style>
 
 
 
