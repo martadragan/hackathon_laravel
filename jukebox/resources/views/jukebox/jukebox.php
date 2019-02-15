@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Jukebox</title>
+    <title>Document</title>
 </head>
 <body>
-    
-<?= $content ?>
 
+    <ul> 
+    <?php foreach($songs as $song) :?>
+    <li>
+    <a href="/jukebox/song?id=<?= $song->id ?>"><?= $song->title ?></a>
 
+    <?= $song->author ?>
+
+    <?= $song->description ?>
+    </li>
+    <?php endforeach ?>
+    </ul>
 </body>
 </html>

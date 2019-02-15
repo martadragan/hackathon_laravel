@@ -14,3 +14,9 @@
 
 Route::get('jukebox/edit', 'JukeboxController@edit');
 Route::post('jukebox/edit', 'JukeboxController@edit');
+
+Route::get('jukebox', 'JukeboxDisplayController@display');
+
+Route::get('jukebox/song', 'JukeboxSongController@video');
+
+Route::post('jukebox/delete', 'JukeboxController@delete');

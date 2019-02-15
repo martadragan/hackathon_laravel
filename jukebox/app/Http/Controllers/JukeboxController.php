@@ -64,7 +64,8 @@ class JukeboxController extends Controller
                     $song->code,
                     $song->author,
                     $song->url,
-                    $song->description
+                    $song->description,
+                    $request->input('id')
                 ]);
             } else {
                 $query = 
@@ -83,6 +84,8 @@ class JukeboxController extends Controller
                 ]);
                 $song->id = DB::getPdo()->lastInsertId();
             }
+
+           
             Session::flash('success_message', 'Song was successfully saved.');
 
             return redirect('jukebox/edit?id='.$song->id);
@@ -91,9 +94,42 @@ class JukeboxController extends Controller
             'song' => $song
         ]);
 
-        return view('jukebox/jukebox', [
-            'content' => $edit_form
+        return $edit_form;
+    }
+
+    public function delete (Request $request)
+    {
+      
+        if ($request->has('id')){
+            $query = "
+                DELETE  
+                FROM `jukebox`
+                WHERE `id` = ?
+                LIMIT 1
+            ";
+            DB::delete ($query, [
+                $request->input('id')
+            ]);
+            Session::flash('success_message', 'Song was successfully deleted.');
+            return redirect('jukebox/edit');
+        }
+
+        $song = (object)[
+            'id'          => null,
+            'title'       => null,
+            'code'        => null,
+            'author'      => null,
+            'date'        => null,
+            'url'         => null,
+            'description' => null
+        ];
+        $edit_form = view('jukebox/edit', [
+            'song' => $song
         ]);
+
+        return $edit_form;
     }
 }
+
+
 
